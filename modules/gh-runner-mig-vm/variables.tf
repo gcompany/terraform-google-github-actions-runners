@@ -18,6 +18,7 @@ variable "project_id" {
   type        = string
   description = "The project id to deploy Github Runner"
 }
+
 variable "region" {
   type        = string
   description = "The GCP region to deploy instances into"
@@ -167,4 +168,10 @@ variable "custom_metadata" {
 variable "cooldown_period" {
   description = "The number of seconds that the autoscaler should wait before it starts collecting information from a new instance."
   default     = 60
+}
+
+variable "additional_apt_packages" {
+  type        = string
+  description = "Additional apt packages to install on the runner"
+  default     = ""
 }

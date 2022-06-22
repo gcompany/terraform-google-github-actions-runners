@@ -30,6 +30,13 @@ secrets=$(gcloud secrets versions access "$SECRET_VERSION" --secret="$SECRET_NAM
 # shellcheck disable=SC2046
 # we want to use wordsplitting
 export $(echo "$secrets" | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]")
+
+# install additional apt packages if defined
+if [[ -n "${ADDITIONAL_APT_PACKAGES}" ]]
+then
+  sudo apt-get install "${ADDITIONAL_APT_PACKAGES}" -y
+fi
+
 #github runner version
 GH_RUNNER_VERSION="2.283.2"
 #get actions binary
